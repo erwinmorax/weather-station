@@ -1,8 +1,8 @@
-const express = require('express')
+import express from 'express'
+import cors from 'cors'
 const conectarDB = require('./src/config/database')
 const telemetriaRoute = require('./src/routes/telemetriaRoute')
 const authRoute = require('./src/routes/authRoute')
-const cors = require('cors')
 
 const app = express()
 conectarDB()
