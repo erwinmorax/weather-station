@@ -5,6 +5,8 @@ const errorHandler = (err, req, res, next) => {
     ok: false,
     message: 'Error interno del servidor',
   })
+
+  next()
 }
 
 export default errorHandler
