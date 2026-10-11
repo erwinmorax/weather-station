@@ -1,3 +1,5 @@
+import validator from '../utils/validators.js'
+
 const validateRegister = (req, res, next) => {
   const { email, username, lastname, password } = req.body
 
@@ -5,6 +7,20 @@ const validateRegister = (req, res, next) => {
     return res.status(400).json({
       ok: false,
       message: 'Datos incompletos, favor de completar.',
+    })
+  }
+
+  if (!validator.isValidEmail(email)) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'El correo electrónico no es válido.',
+    })
+  }
+
+  if (!validator.isValidPassword(password)) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'El correo electrónico no es válido.',
     })
   }
 
@@ -24,4 +40,6 @@ const validateLogin = (req, res, next) => {
   next()
 }
 
-export default { validateRegister, validateLogin }
+const validateAuth = { validateRegister, validateLogin }
+
+export default validateAuth
