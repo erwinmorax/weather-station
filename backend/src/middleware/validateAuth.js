@@ -37,6 +37,20 @@ const validateLogin = (req, res, next) => {
     })
   }
 
+  if (!validator.isValidEmail(email)) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'El correo electrónico no es válido.',
+    })
+  }
+
+  if (!validator.isValidPassword(password)) {
+    return res.status(400).json({
+      ok: false,
+      msg: 'El correo electrónico no es válido.',
+    })
+  }
+
   next()
 }
 
