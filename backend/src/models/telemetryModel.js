@@ -3,22 +3,13 @@ import mongoose from 'mongoose'
 const TelemetrySchema = new mongoose.Schema({
   temperatura: { type: Number, required: true },
   humedad: { type: Number, required: true },
-  rssi: {
-    type: Number,
-    required: true,
-  },
-  voltaje: {
-    type: Number,
-    required: true,
-    min: 0, // El voltaje no debería ser negativo
-  },
-  timestamp: {
-    type: Date,
-    required: true,
-    default: Date.now, // Es mejor usar Date para ordenar y filtrar por rangos de fecha eficientemente
-  },
+  rssi: { type: Number, required: true },
+  voltaje: { type: Number, required: true, min: 0 },
+  timestamp: { type: Date, required: true, default: Date.now },
 })
 
-const Telemetry = mongoose.model('Telemetryl', TelemetrySchema)
+TelemetrySchema.index({ timestamp: -1 })
+
+const Telemetry = mongoose.model('Telemetry', TelemetrySchema)
 
 export default Telemetry
