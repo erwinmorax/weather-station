@@ -1,10 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const authController = require("../controller/authController");
+import express from 'express'
 
-// Ruta para autenticar usuarios
-router.post("/register-user", authController.registroUsuarios);
-router.post("/login", authController.loginUsuarios);
+import userController from '../controller/authController.js'
+import validateAuth from '../middleware/validateAuth.js'
 
+const routerAuth = express.Router()
 
-module.exports = router;
+routerAuth.post('/register', validateAuth.validateRegister, userController.userRegister)
+routerAuth.post('/login', validateAuth.validateLogin, userController.userLogin)
+
+export default routerAuth

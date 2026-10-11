@@ -1,69 +1,28 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
-const dotenv = require('dotenv');
+import registerDto from '../dto/auth/registerDto.js'
+import loginDto from '../dto/auth/loginDto.js'
 
-dotenv.config();
+import authService from '../service/authService.js'
 
-const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || '12');
+const userRegister = async (req, res) => {
+  const registerUser = registerDto(req.body)
+  await authService.userRegisterService(registerUser)
 
-// Función para registrar un usuario nuevo
-exports.registroUsuarios = async (req, res) => {
-    try {
-        const { email, password, username } = req.body;
-        // Validar los campos que son obligatorios
-        if (!email || !password || !username)
-            return res.status(400).json({ message: 'Email, username y contraseña son requeridos' });
-        // Verificar si ya existe email
-        const existingEmail = await User.findOne({ email });
-        if (existingEmail)
-            return res.status(409).json({ message: 'El email ya está en uso' });
-        // Hashear la contraseña
-        const hashed = await bcrypt.hash(password, SALT_ROUNDS);
-        // Crear el nuevo usuario
-        const user = new User({ email, password: hashed, username });
-        await user.save();
-        // Recibir la la respuesta sin la contraseña
-        res.status(201).json({
-            message: 'Usuario creado',
-            user: {
-                id: user._Id,
-                email: user.email,
-                username: user.username
-            }
-        });
-        console.log("Se registro exitosamente el usuario.");
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Error del servidor' });
-    }
+  res.status(201).json({
+    message: 'Se registro exitosamente el usuario.',
+  })
+  console.log('Se registro exitosamente el usuario.')
 }
 
-// Funcion para autenticar los usuarios
-exports.loginUsuarios = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        if (!email || !password) return res.status(400).json({ message: 'Email y contraseña son requeridos' });
+const userLogin = async (req, res) => {
+  const loginUser = loginDto(req.body)
+  await authService.userLoginService(loginUser)
 
-        const user = await User.findOne({ email });
-        if (!user) return res.status(401).json({ message: 'Credenciales incorrectas' });
-        // Comparar la contraseña con el hash guardado
-        const match = await bcrypt.compare(password, user.password);
-        if (!match) return res.status(401).json({ message: 'Credenciales incorrectas' });
+  res.status(200).json({
+    message: 'Inicio de sesión exitoso.'
+  })
+  console.log('Inicio de sesión exitoso.')
+}
 
-        // Generar JWT (firma con SECRET)xx
-        const token = jwt.sign(
-            { sub: user._id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '15m' }
-        );
+const userController = { userRegister, userLogin }
 
-        res.json({ message: 'Autenticado', token, user: { id: user._id, email: user.email } });
-        console.log("Inicio de Sesión Exitoso");
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Error del servidor' });
-    }
-};
-
+export default userController

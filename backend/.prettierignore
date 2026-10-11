@@ -10,5 +10,5 @@ coverage
 # Ignore all HTML files:
 **/*.html
 
-src/
+src/config
 node_modules/
