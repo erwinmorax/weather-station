@@ -1,9 +1,11 @@
 const isValidEmail = (email) => {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  return typeof email === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 const isValidPassword = (password) => {
   return typeof password === 'string' && password.length >= 8
 }
 
-export default { isValidEmail, isValidPassword }
+const validator = { isValidEmail, isValidPassword }
+
+export default validator
