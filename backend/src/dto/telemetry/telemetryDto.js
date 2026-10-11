@@ -1,8 +1,9 @@
 const telemertyDto = (body) => ({
   temperature: body.temperature,
   humedity: body.humedity,
+  rssi: body.rssi,
   voltage: body.voltage,
-  timestamps: body.timestamps,
+  timestamp: body.timestamp,
 })
 
 export default telemertyDto
