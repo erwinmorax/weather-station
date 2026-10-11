@@ -1,10 +1,11 @@
 import express from 'express'
 
-import authController from '../controller/authController.js'
+import userController from '../controller/authController.js'
+import validateAuth from '../middleware/validateAuth.js'
 
 const routerAuth = express.Router()
 
-routerAuth.post('/register', authController.userRegister)
-routerAuth.post('/login', authController.userLogin)
+routerAuth.post('/register', validateAuth.validateRegister, userController.userRegister)
+routerAuth.post('/login', validateAuth.validateLogin, userController.userLogin)
 
 export default routerAuth
