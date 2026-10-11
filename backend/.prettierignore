@@ -11,4 +11,7 @@ coverage
 **/*.html
 
 src/config
+src/routes/authRoute.js
+src/routes/telemetryRoute.js
+
 node_modules/
