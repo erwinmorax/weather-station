@@ -15,4 +15,5 @@ build/
 .vscode/
 
 # Others
-request.http
+request_auth.http
+request_telemetry.http
