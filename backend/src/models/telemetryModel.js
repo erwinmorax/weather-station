@@ -6,6 +6,7 @@ const TelemetrySchema = new mongoose.Schema({
   rssi: { type: Number, required: true },
   voltage: { type: Number, required: true, min: 0 },
   timestamp: { type: Date, required: true, default: Date.now },
+  created_at: { type: Date, default: Date.now },
 })
 
 TelemetrySchema.index({ timestamp: -1 })
