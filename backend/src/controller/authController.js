@@ -18,7 +18,7 @@ const userLogin = async (req, res) => {
   await authService.userLoginService(loginUser)
 
   res.status(200).json({
-    message: 'Inicio de sesión exitoso.'
+    message: 'Inicio de sesión exitoso.',
   })
   console.log('Inicio de sesión exitoso.')
 }
