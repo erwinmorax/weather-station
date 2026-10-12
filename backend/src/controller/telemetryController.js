@@ -1,28 +1,25 @@
-const Telemetria = require('../models/telemetria')
+import telemetryDto from '../dto/telemetry/telemetryDto.js'
+import telemetryService from '../service/telemetryService.js'
 
-exports.saveTelemetry = async (req, res) => {
-  try {
-    const datos = req.body
-    console.log('Datos recibidos del ESP32:', datos)
-    const nuevo = await Telemetria.create(datos)
-    res.status(201).json({
-      ok: true,
-      mensaje: 'Datos almacenados correctamente',
-      data: nuevo,
-    })
-    console.log('Se guardaron los datos en Mongo')
-  } catch (error) {
-    console.error('Error al guardar datos:', error)
-    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
-  }
+const getTelemetry = async (req, res) => {
+  const telemetry = await telemetryService.getTelemetry()
+
+  return res.status(200).json({
+    ok: true,
+    data: telemetry,
+  })
 }
 
-exports.getTelemetry = async (req, res) => {
-  try {
-    const registros = await Telemetria.find().sort({ createdAt: -1 })
-    res.json({ ok: true, total: registros.length, data: registros })
-  } catch (error) {
-    console.error('Error al obtener datos:', error)
-    res.status(500).json({ ok: false, mensaje: 'Error en el servidor' })
-  }
+const saveTelemetry = async (req, res) => {
+  const dataTelemetry = telemetryDto(req.body)
+  await telemetryService.saveTelemetry(dataTelemetry)
+
+  res.status(200).json({
+    message: 'Se registaron los datos del sensor exitosamente.',
+  })
+  console.log('Se registaron los datos del sensor exitosamente.')
 }
+
+const telemetryController = { getTelemetry, saveTelemetry }
+
+export default telemetryController

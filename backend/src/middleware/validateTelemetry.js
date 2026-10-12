@@ -1,7 +1,7 @@
 const validateTelemetry = (req, res, next) => {
-  const { temperature, humedety, rssi, voltage, timestamp } = req.body
+  const { temperature, humedity, rssi, voltage} = req.body
 
-  if (!temperature || !humedety || !rssi || !voltage || !timestamp) {
+  if (!temperature || !humedity || !rssi || !voltage) {
     return res.status(400).json({
       ok: false,
       message: 'Datos del sensor estan incompletos',

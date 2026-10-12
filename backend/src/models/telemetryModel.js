@@ -5,7 +5,6 @@ const TelemetrySchema = new mongoose.Schema({
   humedity: { type: Number, required: true },
   rssi: { type: Number, required: true },
   voltage: { type: Number, required: true, min: 0 },
-  timestamp: { type: Date, required: true, default: Date.now },
   created_at: { type: Date, default: Date.now },
 })
 

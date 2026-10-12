@@ -7,14 +7,13 @@ const getTelemetry = async () => {
 }
 
 const saveTelemetry = async (dataTelemetry) => {
-  const { temperature, humedity, rssi, voltage, timestamp } = dataTelemetry
+  const { temperature, humedity, rssi, voltage } = dataTelemetry
 
   const telemetry = await new Telemetry({
     temperature,
     humedity,
     rssi,
     voltage,
-    timestamp,
   })
 
   await telemetry.save()
