@@ -10,7 +10,6 @@ const userRegister = async (req, res) => {
   res.status(201).json({
     message: 'Se registro exitosamente el usuario.',
   })
-  console.log('Se registro exitosamente el usuario.')
 }
 
 const userLogin = async (req, res) => {
@@ -20,7 +19,6 @@ const userLogin = async (req, res) => {
   res.status(200).json({
     message: 'Inicio de sesión exitoso.',
   })
-  console.log('Inicio de sesión exitoso.')
 }
 
 const userController = { userRegister, userLogin }
