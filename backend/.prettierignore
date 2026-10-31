@@ -10,7 +10,6 @@ coverage
 # Ignore all HTML files:
 **/*.html
 
-src/config
 src/routes/authRoute.js
 src/routes/telemetryRoute.js
 

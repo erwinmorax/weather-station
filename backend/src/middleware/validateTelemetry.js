@@ -1,5 +1,5 @@
 const validateTelemetry = (req, res, next) => {
-  const { temperature, humedity, rssi, voltage} = req.body
+  const { temperature, humedity, rssi, voltage } = req.body
 
   if (!temperature || !humedity || !rssi || !voltage) {
     return res.status(400).json({

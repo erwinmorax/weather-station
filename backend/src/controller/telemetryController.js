@@ -17,7 +17,6 @@ const saveTelemetry = async (req, res) => {
   res.status(200).json({
     message: 'Se registaron los datos del sensor exitosamente.',
   })
-  console.log('Se registaron los datos del sensor exitosamente.')
 }
 
 const telemetryController = { getTelemetry, saveTelemetry }
