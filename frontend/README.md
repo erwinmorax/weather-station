@@ -1,20 +1,24 @@
+# Weather Station FrontEnd
+
+**Weather Station** es una aplicación de recolección de datos meteorológicos, creada para la exposición de visual de los datos de una zona de ***Tolimán, Querétaro***.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Instalación
 
-First, run the development server:
+Instalar dependencias necesarias.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Iniciar la aplicación.
+
+```bash
+pnpm dev
+```
+
+Abrir la apliación en [http://localhost:3000](http://localhost:3000)
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
